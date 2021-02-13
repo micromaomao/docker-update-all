@@ -53,7 +53,7 @@ fn exec<I: IntoIterator<Item = V>, V: AsRef<std::ffi::OsStr>>(argv: I) -> impl I
 	};
 	use std::ops::{Generator, GeneratorState};
 	iter::from_fn(move || {
-		match std::pin::Pin::new(&mut g).resume() {
+		match std::pin::Pin::new(&mut g).resume(()) {
 			GeneratorState::Yielded(s) => Some(s),
 			GeneratorState::Complete(()) => None
 		}
